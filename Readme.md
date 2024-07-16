@@ -7,6 +7,8 @@ This project aims to detect pests in images using a deep learning model trained 
 - **pest_model.pkl:** The trained deep learning model.
 - **main.py:** The FastAPI application for serving the model as a REST API.
 
+Run Jupyter notebook in /notebook to get the pest_model.pkl model and download to model/ directory before proceeding.
+
 ## Setup
 
 1. **Install Dependencies:**
