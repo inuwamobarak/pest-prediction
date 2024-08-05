@@ -61,10 +61,11 @@ st.markdown(
     """
     <style>
     .title {
-        font-family: 'Arial';
+        font-size: 40px;
+        font-family: 'serif';
         color: white;
-        text-align: center;
         margin-top: 20px;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
     }
     .radio {
         color: white;
@@ -77,10 +78,11 @@ st.markdown(
         margin-bottom: 10px;
     }
     .result {
-        font-size: 24px;
+        font-size: 30px;
         color: white;
         text-align: center;
         margin-top: 20px;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 50);
     }
     .probabilities {
         font-size: 18px;
@@ -101,28 +103,32 @@ if option == "Upload an image":
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
         display_image_with_frame(image, 'Uploaded Image.')
-        st.write("Classifying...")
+        placeholder = st.empty()
+        placeholder.write("Classifying...")
         pred_class, pred_idx, probabilities = predict(image)
-        threshold = 0.5  # Set your threshold here
+        threshold = 0.5  # Prediction threshold
         if max(probabilities) < threshold:
             st.markdown(f"<div class='result'>No pest detected.</div>", unsafe_allow_html=True)
         else:
             st.markdown(f"<div class='result'>Predicted Class: {pred_class}</div>", unsafe_allow_html=True)
             # st.markdown(f"<div class='probabilities'>Probabilities: {probabilities}</div>", unsafe_allow_html=True)
+            placeholder.write("Classification Done!")
 
 elif option == "Use camera":
     picture = st.camera_input("Take a picture of the pest")
     if picture:
         image = Image.open(picture)
         display_image_with_frame(image, 'Captured Image.')
-        st.write("Classifying...")
+        placeholder = st.empty()
+        placeholder.write("Classifying...")
         pred_class, pred_idx, probabilities = predict(image)
-        threshold = 0.5  # Set your threshold here
+        threshold = 0.5  # Prediction threshold
         if max(probabilities) < threshold:
             st.markdown(f"<div class='result'>No pest detected.</div>", unsafe_allow_html=True)
         else:
             st.markdown(f"<div class='result'>Predicted Class: {pred_class}</div>", unsafe_allow_html=True)
             # st.markdown(f"<div class='probabilities'>Probabilities: {probabilities}</div>", unsafe_allow_html=True)
+            placeholder.write("Classification Done!")
 
 st.markdown("<hr><center><a href='https://pngtree.com/freebackground/agricultural-technology-green-field"
             "-background_1473313.html'>free background photos from pngtree.com</a></center>", unsafe_allow_html=True)
